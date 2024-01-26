@@ -2,7 +2,7 @@
     id?: string;
     title: string;
     content: string;
-    status: Status
+    status: boolean
 
 }
 export enum Status {

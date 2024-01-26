@@ -13,6 +13,9 @@ export const useTask = defineStore('task', () => {
         listTask.value.push(task);
         console.log('list', listTask.value);
     }
+    const getList=() => {
+        return listTask;
+    }
 
     return {
         listTask,

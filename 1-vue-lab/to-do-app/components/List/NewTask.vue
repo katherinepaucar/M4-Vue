@@ -41,7 +41,7 @@ const onSubmit = () => {
     taskService.addTask({
         title: title.value,
         content: content.value,
-        status: 2,
+        status: false,
     })
 }
 
