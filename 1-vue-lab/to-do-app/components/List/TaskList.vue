@@ -18,18 +18,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Apple MacBook Pro 17"
-                    </th>
-                    <td class="px-6 py-4">
-                        Silver
-                    </td>
-                    <td class="px-6 py-4">
-                        Laptop
-                    </td>
-                    <td class="px-6 py-4">
-                        $2999
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                v-for="task in listTask"
+                    :key="task.id">
+                    <td class="px-6 py-4" 
+               
+                    >
+                        {{task}}
                     </td>
                 </tr>
             </tbody>
@@ -38,7 +33,8 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  
+import type { TaskModel } from '~/types/task.model';
+ defineProps<{
+  listTask: TaskModel[]
 }>()
 </script>
