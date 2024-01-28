@@ -5,19 +5,25 @@ const generateIdTask = () => {
   return id;
 };
 
-export const useTask = defineStore("task", () => {
-  const listTask = ref<TaskModel[]>([]);
-  const addTask = (task: TaskModel) => {
-    task.id = generateIdTask();
-    listTask.value.push(task);
-  };
-  const deleteTask = (id: string) => {
-    listTask.value = listTask.value.filter((task) => task.id !== id);
-  };
+export const useTask = defineStore(
+  "task",
+  () => {
+    const listTask = ref<TaskModel[]>([]);
+    const addTask = (task: TaskModel) => {
+      task.id = generateIdTask();
+      listTask.value.push(task);
+    };
+    const deleteTask = (id: string) => {
+      listTask.value = listTask.value.filter((task) => task.id !== id);
+    };
 
-  return {
-    listTask,
-    addTask,
-    deleteTask,
-  };
-});
+    return {
+      listTask,
+      addTask,
+      deleteTask,
+    };
+  },
+  {
+    persist: true,
+  }
+);

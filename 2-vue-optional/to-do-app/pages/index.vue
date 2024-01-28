@@ -1,3 +1,6 @@
 <template>
-  <ToDoList/>
+  <main>
+    <ToDoList/>
+  </main>
+
 </template>
