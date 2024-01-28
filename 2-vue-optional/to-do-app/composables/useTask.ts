@@ -17,10 +17,24 @@ export const useTask = defineStore(
       listTask.value = listTask.value.filter((task) => task.id !== id);
     };
 
+    const editTask = (newData: TaskModel) => {
+      console.log ('newData editTask', newData)
+      if(newData && newData.id){
+        listTask.value.filter((task) => task.id === newData.id)
+        .map( (task) => {
+          task.title = newData.title,
+          task.content = newData.content,
+          task.status = newData.status
+        })
+
+      }
+    }
+
     return {
       listTask,
       addTask,
       deleteTask,
+      editTask
     };
   },
   {

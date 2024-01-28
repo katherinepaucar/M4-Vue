@@ -24,11 +24,19 @@
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             Agregar
             </button>
+            
         </div>
     </form>
 </template>
 
 <script setup lang="ts">
+import type { TaskModel } from '~/types/task.model';
+
+
+const props = defineProps<{
+  editTask: TaskModel
+}>()
+
 
 const title = ref('');
 const content = ref('');
@@ -38,14 +46,35 @@ const onSubmit = () => {
     if(!title && !content) {
         return;
     }
-    taskService.addTask({
-        title: title.value,
-        content: content.value,
-        status: false,
-    });
-    title.value = '';
-    content.value = '';
+    console.log(' onSubmit props.editTask', props.editTask);
+
+    if(props.editTask && props.editTask.id){
+        //editamos tarea
+        const newData: TaskModel = {
+            id: props.editTask.id,
+            title: title.value,
+            content: content.value,
+            status: props.editTask.status,
+        }
+        
+        taskService.editTask(newData);
+
+    }else{
+        //Anadimos tarea
+            taskService.addTask({
+            title: title.value,
+            content: content.value,
+            status: false,
+        });
+        title.value = '';
+        content.value = '';
+    }
+
     
 }
-
+watchEffect ( () => {
+    title.value = props.editTask.title;
+    content.value = props.editTask.content;
+    console.log(props.editTask);
+})
 </script>
