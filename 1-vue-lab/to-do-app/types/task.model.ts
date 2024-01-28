@@ -5,7 +5,3 @@
     status: boolean
 
 }
-export enum Status {
-    completed = 1,
-    pending = 2
-}
