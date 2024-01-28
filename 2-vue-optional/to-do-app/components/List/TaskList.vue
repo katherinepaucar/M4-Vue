@@ -37,7 +37,7 @@
 
                     </td>
                     <td class="px-6 py-4">
-                        <button @click="deleteItem(task)">
+                        <button @click="deleteItem(task)" aria-label="borrar tarea">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
