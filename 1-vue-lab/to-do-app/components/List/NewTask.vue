@@ -46,7 +46,10 @@ const onSubmit = () => {
         title: title.value,
         content: content.value,
         status: false,
-    })
+    });
+    title.value = '';
+    content.value = '';
+    
 }
 
 </script>
