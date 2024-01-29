@@ -1,6 +1,10 @@
 <template>
   <form   @submit.prevent="onSubmit" class="max-w-sm mx-auto">
-    <h1>Añade los datos de tu tarea</h1>
+    <div class="mb-5 mt-5">
+        <h1 class="text-blue-600" v-if="props && !props.editTask.edit">Añade los datos de tu tarea:</h1>
+        <h1 class="text-green-600" v-else>Edita los datos de la tarea:</h1>
+    </div>
+ 
         <div class="mb-5">
             <label for="title"  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Título</label>
             <input type="title" id="title"
@@ -21,9 +25,13 @@
         <div class="flex items-start mb-5">
 
             <button type="submit"  aria-label="agregar tarea"
+            :class="[props.editTask && props.editTask.edit ? 'bg-green-700 hover:bg-green-800 focus:ring-green-300' : '']"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Agregar
+             {{ props.editTask && props.editTask.edit ? 'Editar': 'Agregar' }}
             </button>
+
+            <a class="pl-4 text-dark" v-if="props && props.editTask.edit" @click="backAddTak">Volver a modo agregar</a>
+            
             
         </div>
     </form>
@@ -75,8 +83,12 @@ const onSubmit = () => {
 watchEffect ( () => {
         title.value = props.editTask?.task?.title;
         content.value = props.editTask?.task?.content;
-        console.log('props.editTask', props.editTask);
-
-
+        // console.log('props.editTask', props.editTask);
 })
+const backAddTak= () => {
+    props.editTask.edit = false;
+    props.editTask.task = {} as TaskModel;
+    title.value = '';
+    content.value = '';
+}
 </script>
