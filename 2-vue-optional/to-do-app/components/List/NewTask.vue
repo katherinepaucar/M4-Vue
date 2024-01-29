@@ -24,7 +24,7 @@
         </div>
         <div class="flex items-start mb-5">
 
-            <button type="submit"  aria-label="agregar tarea"
+            <button type="submit" v-bind:aria-label= "arialText"
             :class="[props.editTask && props.editTask.edit ? 'bg-green-700 hover:bg-green-800 focus:ring-green-300' : '']"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
              {{ props.editTask && props.editTask.edit ? 'Editar': 'Agregar' }}
@@ -48,6 +48,7 @@ const props = defineProps<{
 
 const title = ref('');
 const content = ref('');
+const arialText = ref('Agregar tarea');
 const taskService = useTask();
 
 const onSubmit = () => {
@@ -83,6 +84,10 @@ const onSubmit = () => {
 watchEffect ( () => {
         title.value = props.editTask?.task?.title;
         content.value = props.editTask?.task?.content;
+        if(props && props.editTask && props.editTask.edit){
+            arialText.value = 'Editar Tarea';
+           //  console.log('arialText.value', arialText.value);
+        }
         // console.log('props.editTask', props.editTask);
 })
 const backAddTak= () => {
@@ -90,5 +95,6 @@ const backAddTak= () => {
     props.editTask.task = {} as TaskModel;
     title.value = '';
     content.value = '';
+    arialText.value = 'Agregar Tarea';
 }
 </script>
