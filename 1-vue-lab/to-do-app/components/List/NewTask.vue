@@ -30,10 +30,6 @@
 
 <script setup lang="ts">
 
-
-defineProps<{
-  
-}>()
 const title = ref('');
 const content = ref('');
 const taskService = useTask();
