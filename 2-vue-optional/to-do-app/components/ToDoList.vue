@@ -6,15 +6,10 @@
 <script setup lang="ts">
 import TaskList from './List/TaskList.vue';
 import NewTask from './List/NewTask.vue';
-import type { TaskModel } from '~/types/task.model';
-const taskData = ref <TaskModel>({
-  title: '',
-  content: '',
-  status: false
-  
-});
+import type { TaskModelEdit } from '~/types/task.model';
+const taskData = ref <TaskModelEdit>({} as TaskModelEdit);
 const onMyEditEvent = ($event: any) =>{
-console.log('event',$event);
+// console.log('event',$event);
 taskData.value = $event;
  
 }

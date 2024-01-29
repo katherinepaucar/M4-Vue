@@ -30,11 +30,11 @@
 </template>
 
 <script setup lang="ts">
-import type { TaskModel } from '~/types/task.model';
+import type { TaskModel, TaskModelEdit } from '~/types/task.model';
 
 
 const props = defineProps<{
-  editTask: TaskModel
+  editTask: TaskModelEdit
 }>()
 
 
@@ -48,19 +48,19 @@ const onSubmit = () => {
     }
     console.log(' onSubmit props.editTask', props.editTask);
 
-    if(props.editTask && props.editTask.id){
+    if(props.editTask && props.editTask.edit){
         //editamos tarea
         const newData: TaskModel = {
-            id: props.editTask.id,
+            id: props.editTask.task.id,
             title: title.value,
             content: content.value,
-            status: props.editTask.status,
+            status: props.editTask.task.status,
         }
         
         taskService.editTask(newData);
 
     }else{
-        //Anadimos tarea
+        //Añadimos tarea
             taskService.addTask({
             title: title.value,
             content: content.value,
@@ -73,8 +73,10 @@ const onSubmit = () => {
     
 }
 watchEffect ( () => {
-    title.value = props.editTask.title;
-    content.value = props.editTask.content;
-    console.log(props.editTask);
+        title.value = props.editTask?.task?.title;
+        content.value = props.editTask?.task?.content;
+        console.log('props.editTask', props.editTask);
+
+
 })
 </script>

@@ -5,3 +5,10 @@
     status: boolean
 
 }
+
+​export interface TaskModelEdit {
+ 
+    edit: boolean,
+    task: TaskModel
+
+}

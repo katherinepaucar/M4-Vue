@@ -29,7 +29,7 @@
                     <td class="px-6 py-4">
 
                         <div class="flex items-center justify-center">
-                            <input id="checked-checkbox" type="checkbox" value={{task.status}} v-model="task.status"
+                            <input id="checked-checkbox" type="checkbox" v-model="task.status" @input="updateStatus($event, task)"
                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="checked-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             </label>
@@ -46,7 +46,7 @@
                                     clip-rule="evenodd" />
                             </svg>
                         </button>
-                        <button @click="$emit('edit', task)" aria-label="editar tarea" class="pl-3">
+                        <button @click="$emit('edit', { edit: true, task })" aria-label="editar tarea" class="pl-3">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -69,6 +69,12 @@ import type { TaskModel } from '~/types/task.model';
 const taskService = useTask();
 
 const data = computed(() => taskService.listTask);
+
+const updateStatus = (event: any, task: TaskModel) => {
+    // console.log(event.target.checked);
+    task.status = event.target.checked;
+    taskService.editTask(task);
+}
 
 const deleteItem = (task: TaskModel) => {
     if (!task.id) return;
